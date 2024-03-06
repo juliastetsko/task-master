@@ -22,25 +22,25 @@
       {% for task in task_list %}
         <tr>
           <td>
-              {{ task.id }}
+            {{ task.id }}
           </td>
           <td>
-              {{ task.name }}
+            <a href="{% url "taskmanager:task-detail" pk=task.id %}">{{ task.name }}</a>
           </td>
           <td>
-              {{ task.priority }}
+            {{ task.priority }}
           </td>
           <td>
-              {{ task.task_type}}
+            {{ task.task_type }}
           </td>
           <td>
-              {{ task.deadline }}
+            {{ task.deadline }}
           </td>
         </tr>
       {% endfor %}
     </table>
 
   {% else %}
-      <p>There are no tasks.</p>
+    <p>There are no tasks.</p>
   {% endif %}
 {% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ task.name }}
+  </h1>
+  <p>{{ task.description }}</p>
+  <p><b>Deadline</b>: {{ task.deadline }}</p>
+  <p><b>Is completed</b>: {{ task.is_completed }}</p>
+  <p><b>Priority</b>: {{ task.priority }}</p>
+  <p><b>Type</b>: {{ task.task_type }}</p>
+
+  <p><b>Assignees</b>: </p>
+  <ul>
+    {% for worker in task.assignees.all %}
+      <li>{{ worker.username }} ({{ worker.first_name }} {{ worker.last_name }} {{ worker.position }})</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
