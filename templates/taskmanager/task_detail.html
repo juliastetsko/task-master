@@ -3,6 +3,13 @@
 {% block content %}
   <h1>
     {{ task.name }}
+    <a href="{% url 'taskmanager:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'taskmanager:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
   </h1>
   <p>{{ task.description }}</p>
   <p><b>Deadline</b>: {{ task.deadline }}</p>
