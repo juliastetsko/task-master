@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Task Master Home</h1>
+  <p>You can manage your tasks here!</p>
+  <h2>Tasks statistics</h2>
+  <ul>
+    <li><strong>Total tasks: </strong>{{ total_tasks }}</li>
+    <li><strong>Completed tasks: </strong>{{ completed_tasks }}</li>
+  </ul>
+{% endblock %}
