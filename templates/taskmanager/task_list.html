@@ -20,7 +20,7 @@
         <th>Priority</th>
         <th>Task type</th>
         <th>Deadline</th>
-        <th>Update</th>
+        <th>Assignees</th>
         <th>Delete</th>
       </tr>
 
@@ -42,9 +42,10 @@
             {{ task.deadline }}
           </td>
           <td>
-            <a href="{% url 'taskmanager:task-update' pk=task.id %}">
-              Update
-            </a>
+            {{ task.assignees.count }}
+            {% if task.assignees.count == 1 %}
+              ({{ task.assignees.first.username }})
+            {% endif %}
           </td>
           <td>
             <a style="color: red" href="{% url 'taskmanager:task-delete' pk=task.id %}">
