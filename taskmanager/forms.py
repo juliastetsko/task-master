@@ -22,4 +22,8 @@ class TaskSearchForm(forms.Form):
             }
         )
     )
-
+    include_completed = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={'onclick': 'this.form.submit();'}),
+        label="Include completed"
+    )

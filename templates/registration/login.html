@@ -1,15 +1,40 @@
-{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Login 10</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block content %}
-  <h1>Login</h1>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-  {% if form.errors %}
-    <p style="color: red">Invalid credentials</p>
-  {% endif %}
+</head>
+<body class="img js-fullheight" style="background-image: url({% static 'images/login-bg.jpg' %});">
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-5">
+        <h2 class="heading-section">Sign in</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+          <form method="post" class="signin-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form-group">
+              <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Login">
-  </form>
-{% endblock %}
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
