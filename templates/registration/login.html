@@ -15,12 +15,13 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center mb-5">
-        <h2 class="heading-section">Sign in</h2>
+        <h1 class="h1 text-white">Welcome to Task Master</h1>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-4">
         <div class="login-wrap p-0">
+          <h3 class="mb-4 text-center">Sign in</h3>
           <form method="post" class="signin-form">
             {% csrf_token %}
             {{ form|crispy }}
@@ -34,7 +35,7 @@
   </div>
 </section>
 
-<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/login.js' %}"></script>
 
 </body>
 </html>

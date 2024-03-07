@@ -83,7 +83,7 @@
             {{ task.id }}
           </td>
           <td>
-            <a href="{% url "taskmanager:task-detail" pk=task.id %}">{{ task.name }}</a>
+            <a href="{% url "taskmanager:task-detail" pk=task.id %}"><b>{{ task.name }}</b></a>
           </td>
           <td>
             {{ task.priority }}
