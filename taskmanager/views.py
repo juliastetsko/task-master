@@ -12,9 +12,11 @@ from taskmanager.models import Task, Worker
 def index(request):
     total_tasks = Task.objects.count()
     completed_tasks = Task.objects.filter(is_completed=True).count()
+    total_workers = Worker.objects.count()
     context = {
         "total_tasks": total_tasks,
         "completed_tasks": completed_tasks,
+        "total_workers": total_workers,
     }
     return render(request, "taskmanager/index.html", context=context)
 
@@ -27,9 +29,14 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
         name = self.request.GET.get("name", "")
         assignee = self.request.GET.get("assignee", "")
+        include_completed = self.request.GET.get("include_completed")
 
         context["search_form"] = TaskSearchForm(
-            initial={"name": name, "assignee": assignee}
+            initial={
+                "name": name,
+                "assignee": assignee,
+                "include_completed": True if include_completed else False
+            }
         )
         return context
 
@@ -40,6 +47,8 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
             queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
             if form.cleaned_data["assignee"]:
                 queryset = queryset.filter(assignees__username__iexact=form.cleaned_data["assignee"])
+            if not form.cleaned_data["include_completed"]:
+                queryset = queryset.filter(is_completed=False)
         return queryset
 
 

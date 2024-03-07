@@ -7,8 +7,6 @@ from taskmanager.views import (
     WorkerListView,
 )
 
-
-
 urlpatterns = [
     path("", index, name="index"),
     path(
