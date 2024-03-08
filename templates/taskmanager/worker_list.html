@@ -42,8 +42,7 @@
           <td>{{ worker.position }}</td>
           <td>
             <a href="{% url 'taskmanager:task-list' %}?assignee={{ worker.username }}">
-              {{ worker.tasks.count }}
-            </a>
+              <b>{{ worker.tasks.count }}</b></a>
           </td>
         </tr>
       {% endfor %}
