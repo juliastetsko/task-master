@@ -41,7 +41,7 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Task.objects.all()
+        queryset = Task.objects.prefetch_related("assignees")
         form = TaskSearchForm(self.request.GET)
         if form.is_valid():
             queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
@@ -75,5 +75,5 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class WorkerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
-    model = Worker
+    queryset = Worker.objects.select_related("position")
     success_url = reverse_lazy("taskmanager:worker-list")
