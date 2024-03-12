@@ -6,6 +6,7 @@ from taskmanager.forms import TaskSearchForm, TaskForm
 
 
 class TestTaskSearchForm(TestCase):
+
     def test_task_name_search_form(self) -> None:
         form = TaskSearchForm(
             data={"name": "fix big"}
@@ -29,6 +30,7 @@ class TestTaskSearchForm(TestCase):
 
 
 class TaskFormTest(TestCase):
+
     def test_assignees_field(self):
         get_user_model().objects.create(username="yulia")
         get_user_model().objects.create(username="alisa")

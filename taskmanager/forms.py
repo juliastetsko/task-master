@@ -33,11 +33,17 @@ class TaskSearchForm(forms.Form):
 
 
 class TaskForm(forms.ModelForm):
+    deadline = forms.DateTimeField(
+        widget=forms.DateTimeInput(
+            attrs={"type": "datetime-local"}
+        )
+    )
     assignees = forms.ModelMultipleChoiceField(
         queryset=get_user_model().objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
+
 
     class Meta:
         model = Task
