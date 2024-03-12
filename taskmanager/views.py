@@ -24,7 +24,7 @@ def index(request):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *args, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
 
         name = self.request.GET.get("name", "")
@@ -43,12 +43,23 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         queryset = Task.objects.prefetch_related("assignees")
         form = TaskSearchForm(self.request.GET)
-        if form.is_valid():
-            queryset = queryset.filter(name__icontains=form.cleaned_data["name"])
-            if form.cleaned_data["assignee"]:
-                queryset = queryset.filter(assignees__username__iexact=form.cleaned_data["assignee"])
-            if not form.cleaned_data["include_completed"]:
-                queryset = queryset.filter(is_completed=False)
+
+        if not form.is_valid():
+            return queryset
+
+        name_contains = form.cleaned_data.get("name")
+        assignee_contains = form.cleaned_data.get("assignee")
+        include_completed = form.cleaned_data.get("include_completed")
+
+        if name_contains:
+            queryset = queryset.filter(name__icontains=name_contains)
+
+        if assignee_contains:
+            queryset = queryset.filter(assignees__username__icontains=assignee_contains)
+
+        if not include_completed:
+            queryset = queryset.filter(is_completed=False)
+
         return queryset
 
 

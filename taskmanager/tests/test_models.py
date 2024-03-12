@@ -5,6 +5,7 @@ from taskmanager.models import Task, TaskType, Position
 
 
 class ModelsTest(TestCase):
+
     def setUp(self) -> None:
         self.task_type = TaskType.objects.create(name="Bug")
         self.position = Position.objects.create(name="Developer")
@@ -20,7 +21,7 @@ class ModelsTest(TestCase):
             name="Fix bug",
             description="Fix bug on the project",
             deadline="2024-01-04",
-            priority="high",
+            priority=Task.Priorities.HIGH,
             task_type=self.task_type,
             created_at="2024-20-03",
         )
