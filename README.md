@@ -20,7 +20,7 @@ For beginning you have to install Python3+.
 
 In terminal write down following command:
 ```shell
-git clone https://github.com/yulias97/task-master.git
+git clone https://github.com/juliastetsko/task-master.git
 python -m venv venv
 source venv/bin/activate  # for Windows use: venv\scripts\activate
 pip install -r requirements.txt
